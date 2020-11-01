@@ -17,6 +17,11 @@ class BoostAT169 < Formula
 
   depends_on "icu4c"
 
+  # Fix compiler version check on macOS
+  # https://github.com/boostorg/build/pull/560
+  # patch derived from https://github.com/boostorg/build/commit/40960b23338da0a359d6aa83585ace09ad8804d2
+  patch :DATA
+
   def install
     # Force boost to compile with the desired compiler
     open("user-config.jam", "a") do |file|
@@ -104,3 +109,26 @@ class BoostAT169 < Formula
     system "./test"
   end
 end
+
+__END__
+diff --git a/tools/build/src/tools/darwin.jam b/tools/build/src/tools/darwin.jam
+index 8d477410b0..97e7ecb851 100644
+--- a/tools/build/src/tools/darwin.jam
++++ a/tools/build/src/tools/darwin.jam
+@@ -137,13 +137,14 @@ rule init ( version ? : command * : options * : requirement * )
+     # - Set the toolset generic common options.
+     common.handle-options darwin : $(condition) : $(command) : $(options) ;
+     
++    real-version = [ regex.split $(real-version) \\. ] ;
+     # - GCC 4.0 and higher in Darwin does not have -fcoalesce-templates.
+-    if $(real-version) < "4.0.0"
++    if [ version.version-less $(real-version) : 4 0 ]
+     {
+         flags darwin.compile.c++ OPTIONS $(condition) : -fcoalesce-templates ;
+     }
+     # - GCC 4.2 and higher in Darwin does not have -Wno-long-double.
+-    if $(real-version) < "4.2.0"
++    if [ version.version-less $(real-version) : 4 2 ]
+     {
+         flags darwin.compile OPTIONS $(condition) : -Wno-long-double ;
+     }
