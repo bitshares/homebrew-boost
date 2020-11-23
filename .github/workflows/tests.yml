@@ -7,7 +7,7 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest]
+        os: [macos-11.0, macos-10.15]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
@@ -34,7 +34,7 @@ jobs:
 
       - run: df -h
 
-      - run: brew test-bot --only-formulae
+      - run: brew test-bot --only-formulae || (df -h; false)
         if: github.event_name == 'pull_request'
 
       - name: Upload bottles as artifact
