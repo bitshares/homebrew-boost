@@ -32,6 +32,8 @@ jobs:
 
       - run: brew test-bot --only-tap-syntax
 
+      - run: df -h
+
       - run: brew test-bot --only-formulae
         if: github.event_name == 'pull_request'
 
