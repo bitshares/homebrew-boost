@@ -6,12 +6,6 @@ class BoostAT169 < Formula
   revision 3
   head "https://github.com/boostorg/boost.git"
 
-  bottle do
-    root_url "https://github.com/bitshares/homebrew-boost/releases/download/boost@1.69-1.69.0_3"
-    cellar :any
-    sha256 "f94e158bd2d6a22ae44a0f2897b28fc6652663fec7efd2082607dffe1547695a" => :catalina
-  end
-
   keg_only :versioned_formula
 
   depends_on "icu4c"
