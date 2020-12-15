@@ -1,4 +1,4 @@
-This repository maintains several old boost formulae copied from https://github.com/Homebrew/homebrew-core.
+This repository maintains several old boost formulae got from https://github.com/Homebrew/homebrew-core.
 
 Notes and workflow for maintainers of this repository:
 * always create/update formulae with pull requests;
