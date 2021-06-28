@@ -8,9 +8,8 @@ class BoostAT169 < Formula
 
   bottle do
     root_url "https://github.com/bitshares/homebrew-boost/releases/download/boost@1.69-1.69.0_3"
-    cellar :any
-    sha256 "17e20d66fc97d7b9f08fab2a1d71f69570e09cf0d826268ec17e7c7afdf52010" => :big_sur
-    sha256 "5e5b989087a7fa91fdb33b7fd6949d65af2f36fcf490d5f9487164e83bef1038" => :catalina
+    sha256 cellar: :any, big_sur: "17e20d66fc97d7b9f08fab2a1d71f69570e09cf0d826268ec17e7c7afdf52010"
+    sha256 cellar: :any, catalina: "5e5b989087a7fa91fdb33b7fd6949d65af2f36fcf490d5f9487164e83bef1038"
   end
 
   keg_only :versioned_formula
